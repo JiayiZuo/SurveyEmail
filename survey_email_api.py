@@ -78,25 +78,122 @@ class GraphApiEmailSender:
         :param assessment_link: 评估链接
         :return: 邮件正文内容
         """
+        # template = f"""
+        # <html>
+        # <body>
+        #     <p>尊敬的 <strong>{recipient_name}</strong>，</p>
+        #     <br>
+        #     <p>您好！</p>
+        #     <br>
+        #     <p>为支持员工的持续成长与发展，我们即将开展2025年度的年终360度评估工作。您是 <strong>{employee_name}</strong> 的重要评估人之一，我们诚挚邀请您花几分钟时间为他/她提供宝贵、真实的反馈。</p>
+        #     <br>
+        #     <p>本次评估将围绕公司的文化-合规守正、以人为本、长期共赢、持续创新等多个维度展开。您的反馈将直接帮助 <strong>{employee_name}</strong> 全面了解自身优势与提升空间，制定更有针对性的个人发展计划。</p>
+        #     <br>
+        #     <p><strong>📌 重要说明：</strong></p>
+        #     <p style="text-indent: 2em; margin-left: 2em;"> • <strong>全程匿名</strong>：您的所有反馈将严格保密，报告汇总后仅以匿名形式呈现，<strong>{employee_name}</strong> 无法看到您的具体评价。</p>
+        #     <p style="text-indent: 2em; margin-left: 2em;"> • <strong>真实坦诚</strong>：我们鼓励您基于事实与观察，提供具体、建设性的意见——这不仅是对同事的负责，更是对公司人才发展的支持。</p>
+        #     <p style="text-indent: 2em; margin-left: 2em;"> • <strong>截止时间</strong>：请于2025年12月31日（星期三）前完成评估。</p>
+        #     <p><a href="{assessment_link}" style="color: #1155CC; text-decoration: underline; display: inline-block;">🔗 点击此处立即填写评估表</a></p>
+        #     <p>您的参与对 <strong>{employee_name}</strong> 的成长至关重要。如有任何疑问，请随时联系HR团队。</p>
+        #     <br>
+        #     <p>感谢您拨冗支持！期待您的真诚反馈。</p>
+        # </body>
+        # </html>
+        # """
+
         template = f"""
+        <!DOCTYPE html>
         <html>
-        <body>
-            <p>尊敬的 <strong>{recipient_name}</strong>，</p>
-            <br>
-            <p>您好！</p>
-            <br>
-            <p>为支持员工的持续成长与发展，我们即将开展2025年度的年终360度评估工作。您是 <strong>{employee_name}</strong> 的重要评估人之一，我们诚挚邀请您花几分钟时间为他/她提供宝贵、真实的反馈。</p>
-            <br>
-            <p>本次评估将围绕公司的文化-合规守正、以人为本、长期共赢、持续创新等多个维度展开。您的反馈将直接帮助 <strong>{employee_name}</strong> 全面了解自身优势与提升空间，制定更有针对性的个人发展计划。</p>
-            <br>
-            <p><strong>📌 重要说明：</strong></p>
-            <p style="text-indent: 2em; margin-left: 2em;"> • <strong>全程匿名</strong>：您的所有反馈将严格保密，报告汇总后仅以匿名形式呈现，<strong>{employee_name}</strong> 无法看到您的具体评价。</p>
-            <p style="text-indent: 2em; margin-left: 2em;"> • <strong>真实坦诚</strong>：我们鼓励您基于事实与观察，提供具体、建设性的意见——这不仅是对同事的负责，更是对公司人才发展的支持。</p>
-            <p style="text-indent: 2em; margin-left: 2em;"> • <strong>截止时间</strong>：请于2025年12月31日（星期三）前完成评估。</p>
-            <p><a href="{assessment_link}" style="color: #1155CC; text-decoration: underline; display: inline-block;">🔗 点击此处立即填写评估表</a></p>
-            <p>您的参与对 <strong>{employee_name}</strong> 的成长至关重要。如有任何疑问，请随时联系HR团队。</p>
-            <br>
-            <p>感谢您拨冗支持！期待您的真诚反馈。</p>
+        <head>
+            <meta charset="UTF-8">
+        </head>
+        <body style="margin: 0; padding: 0; font-family: 'Microsoft YaHei', Arial, sans-serif; color: #333333; line-height: 1.6; font-size: 15px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ffffff;">
+                <tr>
+                    <td style="padding: 20px;">
+                        <!-- 称呼部分 -->
+                        <p style="margin: 0 0 15px 0;">
+                            尊敬的 <strong>{recipient_name}</strong>，
+                        </p>
+                        
+                        <p style="margin: 0 0 15px 0;">
+                            您好！
+                        </p>
+                        
+                        <!-- 第一段 -->
+                        <p style="margin: 0 0 15px 0;">
+                            为支持员工的持续成长与发展，我们即将开展2025年度的年终360度评估工作。您是 <strong>{employee_name}</strong> 的重要评估人之一，我们诚挚邀请您花几分钟时间为他/她提供宝贵、真实的反馈。
+                        </p>
+                        
+                        <!-- 第二段 -->
+                        <p style="margin: 0 0 20px 0;">
+                            本次评估将围绕公司的文化-合规守正、以人为本、长期共赢、持续创新等多个维度展开。您的反馈将直接帮助 <strong>{employee_name}</strong> 全面了解自身优势与提升空间，制定更有针对性的个人发展计划。
+                        </p>
+                        
+                        <!-- 重要说明标题 -->
+                        <p style="margin: 0 0 12px 0; font-weight: bold;">
+                            📌 重要说明：
+                        </p>
+                        
+                        <!-- 重要说明内容（整体缩进两个字符） -->
+                        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-left: 40px;">
+                            <!-- 全程匿名 -->
+                            <tr>
+                                <td width="20" valign="top" style="padding: 2px 5px 0 0;">
+                                    <span style="color: #000000;">•</span>
+                                </td>
+                                <td>
+                                    <p style="margin: 0 0 8px 0;">
+                                        <strong>全程匿名</strong>：您的所有反馈将严格保密，报告汇总后仅以匿名形式呈现，<strong>{employee_name}</strong> 无法看到您的具体评价。
+                                    </p>
+                                </td>
+                            </tr>
+                            
+                            <!-- 真实坦诚 -->
+                            <tr>
+                                <td width="20" valign="top" style="padding: 2px 5px 0 0;">
+                                    <span style="color: #000000;">•</span>
+                                </td>
+                                <td>
+                                    <p style="margin: 0 0 8px 0;">
+                                        <strong>真实坦诚</strong>：我们鼓励您基于事实与观察，提供具体、建设性的意见——这不仅是对同事的负责，更是对公司人才发展的支持。
+                                    </p>
+                                </td>
+                            </tr>
+                            
+                            <!-- 截止时间 -->
+                            <tr>
+                                <td width="20" valign="top" style="padding: 2px 5px 0 0;">
+                                    <span style="color: #000000;">•</span>
+                                </td>
+                                <td>
+                                    <p style="margin: 0;">
+                                        <strong>截止时间</strong>：请于<strong>2025年12月31日（星期三）</strong>前完成评估。
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <!-- 链接部分 -->
+                        <p style="margin: 20px 0;">
+                            <a href="{assessment_link}" 
+                               style="color: #1155CC; text-decoration: underline; font-weight: normal;">
+                                🔗 点击此处立即填写评估表
+                            </a>
+                        </p>
+                        
+                        <!-- 结尾段落1 -->
+                        <p style="margin: 0 0 15px 0;">
+                            您的参与对 <strong>{employee_name}</strong> 的成长至关重要。如有任何疑问，请随时联系HR团队。
+                        </p>
+                        
+                        <!-- 结尾段落2 -->
+                        <p style="margin: 0;">
+                            感谢您拨冗支持！期待您的真诚反馈。
+                        </p>
+                    </td>
+                </tr>
+            </table>
         </body>
         </html>
         """
