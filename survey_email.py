@@ -7,18 +7,20 @@ import pandas as pd
 import time
 import random
 
+from dotenv import load_dotenv
+
 
 class OutlookEmailSender:
-    def __init__(self, sender_email, sender_password):
+    def __init__(self):
         """
         初始化邮件发送器
         :param sender_email: 发件人邮箱地址
         :param sender_password: 发件人邮箱密码或应用专用密码
         """
-        self.sender_email = sender_email
-        self.sender_password = sender_password
-        self.smtp_server = "smtp-mail.outlook.com"
-        self.smtp_port = 587
+        self.sender_email = os.getenv("SENDER_EMAIL")
+        self.sender_password = os.getenv("SENDER_PASSWORD")
+        self.smtp_server = os.getenv("SMTP_SERVER")
+        self.smtp_port = os.getenv("SMTP_PORT")
 
     def connect_smtp(self):
         """连接SMTP服务器"""
@@ -92,7 +94,7 @@ class OutlookEmailSender:
             <br>
             <p>您好！</p>
             <br>
-            <p>为支持员工的持续成长与发展，我们即将开展2025年度的年终360度评估工作。您被 <strong>{employee_name}</strong> 指定为重要评估人之一，我们诚挚邀请您花几分钟时间为他/她提供宝贵、真实的反馈。</p>
+            <p>为支持员工的持续成长与发展，我们即将开展2025年度的年终360度评估工作。您是 <strong>{employee_name}</strong> 的重要评估人之一，我们诚挚邀请您花几分钟时间为他/她提供宝贵、真实的反馈。</p>
             <br>
             <p>本次评估将围绕公司的文化-合规守正、以人为本、长期共赢、持续创新等多个维度展开。您的反馈将直接帮助 <strong>{employee_name}</strong> 全面了解自身优势与提升空间，制定更有针对性的个人发展计划。</p>
             <br>
@@ -206,12 +208,8 @@ def main():
     print("360度评估邮件批量发送工具")
     print("=" * 60)
 
-    # 设置发件人信息（请替换为实际邮箱信息）
-    SENDER_EMAIL = ""
-    SENDER_PASSWORD = ""
-
     # 创建邮件发送器实例
-    sender = OutlookEmailSender(SENDER_EMAIL, SENDER_PASSWORD)
+    sender = OutlookEmailSender()
 
     # 指定Excel文件路径
     excel_file = os.getcwd()  + '\\file.xlsx'
@@ -233,4 +231,5 @@ if __name__ == "__main__":
     # print("5. 邮件模板严格按照要求设计，包含所有指定内容")
     # print()
 
+    load_dotenv()
     main()
